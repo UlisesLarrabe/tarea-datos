@@ -187,3 +187,21 @@ sonIguales _ _ = False
 
 juntarPokemon :: (Entrenador, Entrenador) -> [Pokemon]
 juntarPokemon (E n pk1e1 pk2e1, E n2 pk1e2 pk2e2 ) = pk1e1 : pk2e1 : pk1e2 : pk2e2 : []
+
+--5. FUNCIONES POLIMORFICAS
+
+--a
+loMismo :: a -> a 
+loMismo a = a
+
+--b
+siempreSiete :: a -> Int
+siempreSiete _ = 7
+
+--c
+swap :: (a,b) -> (b, a)
+swap (n, x) = (x, n)
+--Respuesta c: Existen dos variables de tipo diferentes ya que las tuplas pueden contener elementos de distintos tipos.
+
+--RESPUESTA: Estas funciones son polimorficas ya que se permite definir una funcion generica para cualquier tipos de datos, porque en estos casos no importa el tipo de dato.
+
