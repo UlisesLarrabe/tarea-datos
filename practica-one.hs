@@ -205,3 +205,22 @@ swap (n, x) = (x, n)
 
 --RESPUESTA: Estas funciones son polimorficas ya que se permite definir una funcion generica para cualquier tipos de datos, porque en estos casos no importa el tipo de dato.
 
+--6. PATTERN MATCHING
+
+--2
+estaVacia :: [a] -> Bool
+estaVacia [] = True
+estaVacia (_:_) = False
+
+--3
+elPrimero :: [a] -> a 
+--PRECOND: La lista no puede ser vacia
+elPrimero (c:xs) = c
+
+sinElPrimero :: [a] -> [a]
+--PRECOND: La lista no puede ser vacia
+sinElPrimero (c:xs) = xs
+
+splitHead :: [a] -> (a, [a])
+--PRECOND: La lista no puede ser vacia
+splitHead (c:xs) = (c, xs)
