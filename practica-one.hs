@@ -99,3 +99,91 @@ estaEnElMedio :: DiaDeSemana -> Bool
 estaEnElMedio Lunes = False
 estaEnElMedio Domingo = False
 estaEnElMedio _      = True
+
+--3
+
+--a
+negar :: Bool -> Bool
+negar True = False
+negar False = True
+
+--b
+implica :: Bool -> Bool -> Bool
+implica True False = False
+implica _ _ = True
+
+--c
+yTambien :: Bool -> Bool -> Bool
+yTambien True True = True
+yTambien _ _ = False
+
+--d
+oBien :: Bool -> Bool -> Bool
+oBien False False = False
+oBien _ _ = True
+
+--4. REGISTROS
+data Persona = P String Int
+                --Nombre Edad
+                deriving Show
+
+
+nombre :: Persona -> String
+nombre (P n e) = n
+
+edad :: Persona -> Int
+edad (P n e) = e
+
+crecer :: Persona -> Persona
+crecer (P n e) = P n (e + 1)
+
+cambioDeNombre :: String -> Persona -> Persona
+cambioDeNombre nuevoNombre (P n e) = P nuevoNombre e
+
+esMayorQueLaOtra :: Persona -> Persona -> Bool
+esMayorQueLaOtra (P n1 e1) (P n2 e2) = if (e1 > e2)
+                                        then True
+                                        else False
+
+laQueEsMayor :: Persona -> Persona -> Persona
+laQueEsMayor (P n1 e1) (P n2 e2) = if (e1 > e2)
+                                        then (P n1 e1)
+                                        else (P n2 e2)
+
+--2
+data TipoDePokemon = Agua | Fuego | Planta
+              deriving Show
+data Pokemon = Pk TipoDePokemon Int
+                            --Porcentaje de energia
+              deriving Show
+data Entrenador = E String Pokemon Pokemon 
+                --Nombre
+                deriving Show
+
+superaA :: Pokemon -> Pokemon -> Bool
+superaA (Pk tipo1 _) (Pk tipo2 _) = if (tipoEsSuperior tipo1 tipo2)
+                                    then True
+                                    else False
+
+tipoEsSuperior :: TipoDePokemon -> TipoDePokemon -> Bool
+tipoEsSuperior  Agua Fuego = True
+tipoEsSuperior  Fuego Planta = True
+tipoEsSuperior Planta Agua = True
+tipoEsSuperior _ _ = False
+
+cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
+cantidadDePokemonDe tipo (E n pk1 pk2) = (esDelTipo pk1 tipo) + (esDelTipo pk2 tipo)
+
+esDelTipo :: Pokemon -> TipoDePokemon -> Int
+esDelTipo (Pk tipoPk p) tipo = if (sonIguales tipoPk tipo)
+                                  then 1 
+                                  else 0
+
+sonIguales :: TipoDePokemon -> TipoDePokemon -> Bool
+sonIguales Agua Agua = True
+sonIguales Fuego Fuego = True
+sonIguales Planta Planta = True
+sonIguales _ _ = False
+
+juntarPokemon :: (Entrenador, Entrenador) -> [Pokemon]
+juntarPokemon (E n pk1e1 pk2e1, E n2 pk1e2 pk2e2 ) = pk1e1 : pk2e1 : pk1e2 : pk2e2 : []
